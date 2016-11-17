@@ -7,17 +7,6 @@ grapport = environ["grapport"] if "grapport" in environ else 2003
 topic = environ["topic"] if "topic" in environ else "mytopic"
 bootstrap_servers = environ["bootstrap_servers"] if "bootstrap_servers" in environ else "localhost:9092"
 
-
-
-#grapserver = 'graphite-marathonlb-dm.marathon.mesos.lga'
-#grapport = 12083
-#topic = "metrics.kafka"
-#bootstrap_servers=[
-#    "ams-kafka00.pulse.prod:9092",
-#    "ams-kafka01.pulse.prod:9092",
-#    "ams-kafka02.pulse.prod:9092",
-#    ]
-
 consumer = KafkaConsumer(topic, bootstrap_servers=bootstrap_servers, group_id=None, max_partition_fetch_bytes=10485760, auto_offset_reset="earliest")
 
 for msg in consumer:
