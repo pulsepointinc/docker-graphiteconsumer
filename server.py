@@ -17,8 +17,8 @@ for msg in consumer:
 	else:
 		if ts.isdigit() and val.isdigit():
 			print (key, val, ts)
-			message = '%s %s %s\n' % (key, val, ts)
-			print 'sending message:\n%s' % message
+                        message = ('%s %s %s\n' % (key, val, ts))
+                        print ('sending message:\n%s' % message)
 			sock = socket.socket()
 			sock.connect((grapserver, grapport))
 			sock.sendall(message)
