@@ -12,7 +12,7 @@ consumer = KafkaConsumer(topic, bootstrap_servers=bootstrap_servers, group_id=No
 for msg in consumer:
 	try:
 		key, val, ts = msg.value.split(' ') 
-	except ValueError:
+	except TypeError or ValueError:
     		print ("Value Failure")
 	else:
 		if ts.isdigit() and val.isdigit():
