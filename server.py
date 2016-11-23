@@ -3,7 +3,7 @@ from os import environ
 import socket
 
 grapserver = environ["grapserver"] if "grapserver" in environ else "0.0.0.0"
-grapport = environ["grapport"] if "grapport" in environ else 2003
+grapport = int(environ["grapport"]) if "grapport" in environ else 2003
 topic = environ["topic"] if "topic" in environ else "mytopic"
 bootstrap_servers = environ["bootstrap_servers"] if "bootstrap_servers" in environ else "localhost:9092"
 
