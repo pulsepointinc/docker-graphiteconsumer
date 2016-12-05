@@ -31,7 +31,7 @@ consumer = KafkaConsumer(topic, **conf)
 
 for msg in consumer:
     try:
-        key, val, ts = msg.value.split(' ') 
+        key, val, ts = msg.value.decode().split(' ') 
     except:
         logging.exception("Failed in extracting metric from {}".format(str(msg)))
     else:
@@ -40,5 +40,5 @@ for msg in consumer:
             logging.debug("Sending message: {}\n".format(message))
             sock = socket.socket()
             sock.connect((grapserver, grapport))
-            sock.sendall(message)
+            sock.sendall(message.encode())
             sock.close()
