@@ -8,6 +8,13 @@ from kafka import KafkaConsumer
 def get_env_config(var, default):
     return environ[var] if var in environ else default
 
+def isnumeric(val):
+    try:
+        float(val)
+        return True
+    except ValueError:
+        return False
+
 grapserver = get_env_config("grapserver", "0.0.0.0")
 grapport = int(get_env_config("grapport", 2003))
 topic = get_env_config("topic", "mytopic")
@@ -35,7 +42,7 @@ for msg in consumer:
     except:
         logging.exception("Failed in extracting metric from {}".format(str(msg)))
     else:
-        if ts.isdigit() and val.isdigit():
+        if isnumeric(ts) and isnumeric(val):
             message = ("{} {} {}\n".format(key, val, ts))
             logging.debug("Sending message: {}\n".format(message))
             sock = socket.socket()
